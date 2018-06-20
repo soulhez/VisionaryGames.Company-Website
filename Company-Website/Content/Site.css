@@ -20,8 +20,21 @@
 
 .mainContent {
     background-image: url("images/tilebackground4.png");
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.video-aspect-ratio {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 51%;
 }
 
 .dl-horizontal dt {
     white-space: normal;
+}
+
+body {
+    background-color: #191D1F;
 }
