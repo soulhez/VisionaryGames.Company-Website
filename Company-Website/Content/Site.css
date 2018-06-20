@@ -1,24 +1,27 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.topSplash {
+    background: url("images/background.jpg") no-repeat center center;
+    background-size: cover;
+    min-height: 100%;
+    text-align: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid white;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.subBox {
+    background-color: black;
+    background: rgba(0,0,0,.6);
+    border-radius: 5px;
+    color: #e5e5e5;
+    border: 1px solid #424242;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
+.mainContent {
+    background-image: url("images/tilebackground4.png");
+}
+
 .dl-horizontal dt {
     white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
 }

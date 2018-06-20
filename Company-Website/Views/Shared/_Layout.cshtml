@@ -8,31 +8,33 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="container-fluid topSplash">
+        <div class="row">
+            <div class="col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+                <img src="~/Content/images/GameLogo.png" style="width: 80%;" />
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+        </div>
+        <div class="row">
+            <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6 subBox">
+                <h4>Project Phoenix Rising is a Third Person action MOBA in development by Visionary Games. Subscribe to our newsletter below to get the latest updates on the game's progress.</h4>
+                <br />
+
+                <div class="row">
+                    <div class="col-xs-offset-1 col-xs-10  col-sm-offset-1 col-sm-7" style="background-color: white;">
+                        bleh
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3" style="background-color: orange;">
+                        bleh
+                    </div>
+                </div>
+
+                <br />
+                <h4>You can also join the community on Reddit and Discord!</h4>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container-fluid mainContent">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
