@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Company_Website.Models.Subscribe
+@{
     ViewBag.Title = "Visionary Games | Project Phoenix Rising";
 }
 
@@ -13,15 +14,20 @@
             <h4>Project Phoenix Rising is a Third Person action MOBA in development by Visionary Games. Subscribe to our newsletter below to get the latest updates on the game's progress.</h4>
             <br />
 
-            <div class="row">
-                <div class="col-xs-offset-1 col-xs-10  col-sm-offset-0 col-sm-9" style="background-color: white;">
-                    bleh
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "Edit-Email-form" }))
+            {
+                @Html.AntiForgeryToken();
+                <div class="row">
+                    <div class="col-xs-offset-1 col-xs-10  col-sm-offset-0 col-sm-9">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3">
+                        <input type="submit" value="Subscribe" style="width: 100%; background-color: #F15A24; height: 30px;" />
+                    </div>
                 </div>
-                <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3" style="background-color: orange;">
-                    bleh
-                </div>
-            </div>
 
+            }
             <br />
             <h4>You can also join the community on Reddit and Discord!</h4>
         </div>
@@ -31,7 +37,9 @@
 <div class="container-fluid mainContent">
     <div class="row">
         <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6 subBox">
-            asdfgasdfasdf
+            Visionary Games is an indie development studio that was created by a collection of people located all around the world with a singular idea in mind: to create high quality, visually spectacular, mechanically driven games with the communities ideas as the foundation of development.
+            <br /><br />
+            Our current project under development is called Project: Phoenix Rising and is aimed to be a 3D Z-axis Multiplayer Action Real Time Strategy game that incorporates the basic fundamentals found in most moba’s, but differs by being 3rd person with Z-axis input. The art style will be based on realism while having many sci-fi and fantasy elements present.
         </div>
     </div>
     <br />
@@ -53,10 +61,6 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <img src="~/Content/images/Carousel1.png" alt="1" style="width: 100%">
-                    </div>
-
-                    <div class="item">
-                        <img src="~/Content/images/Carousel2.png" alt="2" style="width: 100%">
                     </div>
 
                     <div class="item">

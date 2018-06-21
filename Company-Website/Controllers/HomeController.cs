@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Company_Website.Models;
+using PhoenixRising.InternalAPI.App.MailList;
 
 namespace Company_Website.Controllers
 {
@@ -13,18 +16,26 @@ namespace Company_Website.Controllers
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Subscribe model)
         {
-            ViewBag.Message = "Your application description page.";
+            if (ModelState.IsValid)
+            {
+                string connection = ConfigurationManager.AppSettings["InternalAPIURL"];
+                var appAccessToken = WebUtils.GetVaultSecret("AppConnectionKey");
 
-            return View();
-        }
+                SubscribeRequest resetRequest = new SubscribeRequest(connection, appAccessToken, model.Email);
+                SubscribeResponse resetResponse = resetRequest.Send();
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+                //always act like success - don't want people fishing for email addresses
+                TempData["Success"] = "You have been subscribed to our newsletter! We promise to only email the most important updates.";
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View(model);
+            }
         }
     }
 }
