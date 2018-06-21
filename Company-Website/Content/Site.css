@@ -5,7 +5,7 @@
     text-align: center;
     padding-top: 2em;
     padding-bottom: 2em;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #808080;
 }
 
 .subBox {
@@ -19,7 +19,7 @@
 }
 
 .mainContent {
-    background-image: url("images/tilebackground4.png");
+    background-image: url("images/tilebackground3.png");
     padding-top: 1em;
     padding-bottom: 1em;
 }
@@ -57,6 +57,11 @@
 
 .logoFull {
     width: 100%;
+}
+
+.legal {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .video-aspect-ratio {
