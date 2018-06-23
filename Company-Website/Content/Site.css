@@ -1,5 +1,5 @@
 ﻿.topSplash {
-    background: url("images/background.jpg") no-repeat center center;
+    background: url("images/background.png") no-repeat center center;
     background-size: cover;
     min-height: 100%;
     text-align: center;
@@ -52,7 +52,7 @@
 }
 
 .socialLogoSmall {
-    height: 50px;
+    height: 30px;
     margin: 5px;
 }
 
