@@ -23,14 +23,26 @@ namespace Company_Website.Controllers
             if (ModelState.IsValid)
             {
                 string connection = ConfigurationManager.AppSettings["InternalAPIURL"];
-                var appAccessToken = WebUtils.GetVaultSecret("AppConnectionKey");
+                var appAccessToken = ConfigurationManager.AppSettings["AppKey"];
 
-                SubscribeRequest resetRequest = new SubscribeRequest(connection, appAccessToken, model.Email);
-                SubscribeResponse resetResponse = resetRequest.Send();
-
-                //always act like success - don't want people fishing for email addresses
-                TempData["Success"] = "You have been subscribed to our newsletter! We promise to only email the most important updates.";
-                return RedirectToAction("Index", "Home");
+                SubscribeRequest subscribeRequest = new SubscribeRequest(connection, appAccessToken, model.Email);
+                SubscribeResponse subscribeResponse = subscribeRequest.Send();
+                
+                if (subscribeResponse.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    TempData["Success"] = "You have been subscribed to our newsletter!";
+                    return RedirectToAction("Index", "Home");
+                }
+                else if (subscribeResponse.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                {
+                    TempData["Errors"] = "That email address is already subscribed.";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    TempData["Errors"] = "There was an error processing your request.";
+                    return RedirectToAction("Index", "Home");
+                }
             }
             else
             {

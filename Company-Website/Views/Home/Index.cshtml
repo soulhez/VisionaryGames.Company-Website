@@ -14,22 +14,36 @@
             <h4>Project Phoenix Rising is a Third Person action MOBA in development by Visionary Games. Subscribe to our newsletter below to get the latest updates on the game's progress.</h4>
             <br />
 
-            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "Edit-Email-form" }))
+            @if (TempData["Success"] != null)
             {
-                @Html.AntiForgeryToken();
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-10  col-sm-offset-0 col-sm-9">
-                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Email Address", @class = "form-control subscribeText" })
-                        @Html.ValidationMessageFor(m => m.Email)
-                    </div>
-                    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3">
-                        <input type="submit" value="Subscribe" class="subscribeButton" />
-                    </div>
-                </div>
+                <div class="alert alert-success">@TempData["Success"]</div>
             }
+            else
+            {
+                using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "Edit-Email-form" }))
+                {
+                    @Html.AntiForgeryToken();
+                    <div class="row">
+                        <div class="col-xs-offset-1 col-xs-10  col-sm-offset-0 col-sm-9">
+                            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email Address", @class = "form-control subscribeText" })
+                            @Html.ValidationMessageFor(m => m.Email)
+                        </div>
+                        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3">
+                            <input type="submit" value="Subscribe" class="subscribeButton" />
+                        </div>
+                    </div>
+                }
+            }
+            @if (TempData["Errors"] != null)
+            {
+                <div class="col-xs-offset-1 col-xs-10  col-sm-offset-0 col-sm-12 alert alert-danger" style="margin-top: 10px;">@TempData["Errors"]</div>
+            }
+
             <br />
-            <h4>You can also join the community on Reddit and Discord!</h4>
             <div class="row">
+                <div class="col-xs-offset-1 col-xs-10  col-sm-offset-0 col-sm-12" style="margin-top: 10px;">
+                    <h4>You can also join the community on Reddit and Discord!</h4>
+                </div>
                 <div class="col-xs-offset-2 col-xs-8 col-sm-offset-1 col-sm-5">
                     <a href="https://www.reddit.com/r/visionary_games/" target="new"><img src="~/Content/images/RedditLarge.png" class="logo" /></a>
                 </div>
@@ -44,9 +58,9 @@
 <div class="container-fluid mainContent">
     <div class="row">
         <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6 subBox">
-            Visionary Games is an indie development studio that was created by a collection of people located all around the world with a singular idea in mind: to create high quality, visually spectacular, mechanically driven games with the communities ideas as the foundation of development.
+            Visionary Games is an indie development studio that was created by a collection of people located all around the world with a singular idea in mind: to create high quality, visually spectacular, mechanically driven games with the community's ideas as the foundation of development.
             <br /><br />
-            Our current project under development is called Project: Phoenix Rising and is aimed to be a 3D Z-axis Multiplayer Action Real Time Strategy game that incorporates the basic fundamentals found in most moba’s, but differs by being 3rd person with Z-axis input. The art style will be based on realism while having many sci-fi and fantasy elements present.
+            Our current project under development is called Project: Phoenix Rising and is aimed to be a 3D Z-axis Multiplayer Online Battle Arena that incorporates the basic fundamentals found in most MOBAs, but differs by uysing a  3rd person with Z-axis input. The art style will be based on realism while having many sci-fi and fantasy elements present.
         </div>
     </div>
     <br />
@@ -58,19 +72,50 @@
 
             <br />
 
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            @*<div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                     <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                    <li data-target="#myCarousel" data-slide-to="4"></li>
+                    <li data-target="#myCarousel" data-slide-to="5"></li>
+                    <li data-target="#myCarousel" data-slide-to="6"></li>
+                    <li data-target="#myCarousel" data-slide-to="7"></li>
+                    <li data-target="#myCarousel" data-slide-to="8"></li>
                 </ol>
 
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="~/Content/images/Carousel1.png" alt="1" class="logoFull">
+                        <img src="~/Content/images/Carousel1.jpg" alt="1" class="logoFull">
                     </div>
 
                     <div class="item">
-                        <img src="~/Content/images/Carousel3.png" alt="3" class="logoFull">
+                        <img src="~/Content/images/Carousel2.jpg" alt="2" class="logoFull">
+                    </div>
+
+                    <div class="item">
+                        <img src="~/Content/images/Carousel4.jpg" alt="4" class="logoFull">
+                    </div>
+
+                    <div class="item">
+                        <img src="~/Content/images/Carousel5.jpg" alt="5" class="logoFull">
+                    </div>
+
+                    <div class="item">
+                        <img src="~/Content/images/Carousel6.jpg" alt="6" class="logoFull">
+                    </div>
+
+                    <div class="item">
+                        <img src="~/Content/images/Carousel7.jpg" alt="7" class="logoFull">
+                    </div>
+
+                    <div class="item">
+                        <img src="~/Content/images/Carousel8.jpg" alt="8" class="logoFull">
+                    </div>
+
+                    <div class="item">
+                        <img src="~/Content/images/Carousel9.jpg" alt="9" class="logoFull">
                     </div>
                 </div>
 
@@ -82,12 +127,12 @@
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     <span class="sr-only">Next</span>
                 </a>
-            </div>
+            </div>*@
         </div>
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid foot">
     <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
         <div class="row">
             <div class="col-sm-8" style="color: white;">
