@@ -204,6 +204,7 @@
     <Content Include="Content\images\DiscordLarge.png" />
     <Content Include="Content\images\DiscordSmall.png" />
     <Content Include="Content\images\FacebookSmall.png" />
+    <Content Include="Content\images\favicon.png" />
     <Content Include="Content\images\GameLogo.png" />
     <Content Include="Content\images\maxres\Background.png" />
     <Content Include="Content\images\maxres\c1.jpg" />
