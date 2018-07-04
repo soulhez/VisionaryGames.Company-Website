@@ -5,33 +5,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VisionaryGames.Website.Models;
+using PhoenixRising.InternalAPI.App.MailList;
 
 namespace VisionaryGames.Website.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Subscribe model)
         {
-            ViewData["Message"] = "Your application description page.";
+            if (ModelState.IsValid)
+            {
+                string connection = ConfigurationManager.AppSettings["InternalAPIURL"];
+                var appAccessToken = WebUtils.GetVaultSecret("AppConnectionKey");
 
-            return View();
-        }
+                SubscribeRequest resetRequest = new SubscribeRequest(connection, appAccessToken, model.Email);
+                SubscribeResponse resetResponse = resetRequest.Send();
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                //always act like success - don't want people fishing for email addresses
+                TempData["Success"] = "You have been subscribed to our newsletter! We promise to only email the most important updates.";
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View(model);
+            }
         }
     }
 }
