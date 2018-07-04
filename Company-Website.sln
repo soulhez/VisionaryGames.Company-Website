@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company-Website", "Company-Website\Company-Website.csproj", "{DCEA7074-B417-4F08-ABF4-F1C41B7BDFB6}"
 EndProject
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "VisionaryGames.Website.ServiceFabric", "VisionaryGames.Website.ServiceFabric\VisionaryGames.Website.ServiceFabric.sfproj", "{5F0ADBAF-776B-4BDF-9446-2DF157A54E68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisionaryGames.Website", "VisionaryGames.Website\VisionaryGames.Website.csproj", "{8AED3677-C1AD-4EEE-9DE3-41B9A8AD87B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,22 @@ Global
 		{DCEA7074-B417-4F08-ABF4-F1C41B7BDFB6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DCEA7074-B417-4F08-ABF4-F1C41B7BDFB6}.Release|x64.ActiveCfg = Release|Any CPU
 		{DCEA7074-B417-4F08-ABF4-F1C41B7BDFB6}.Release|x64.Build.0 = Release|Any CPU
+		{5F0ADBAF-776B-4BDF-9446-2DF157A54E68}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{5F0ADBAF-776B-4BDF-9446-2DF157A54E68}.Debug|x64.ActiveCfg = Debug|x64
+		{5F0ADBAF-776B-4BDF-9446-2DF157A54E68}.Debug|x64.Build.0 = Debug|x64
+		{5F0ADBAF-776B-4BDF-9446-2DF157A54E68}.Debug|x64.Deploy.0 = Debug|x64
+		{5F0ADBAF-776B-4BDF-9446-2DF157A54E68}.Release|Any CPU.ActiveCfg = Release|x64
+		{5F0ADBAF-776B-4BDF-9446-2DF157A54E68}.Release|x64.ActiveCfg = Release|x64
+		{5F0ADBAF-776B-4BDF-9446-2DF157A54E68}.Release|x64.Build.0 = Release|x64
+		{5F0ADBAF-776B-4BDF-9446-2DF157A54E68}.Release|x64.Deploy.0 = Release|x64
+		{8AED3677-C1AD-4EEE-9DE3-41B9A8AD87B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AED3677-C1AD-4EEE-9DE3-41B9A8AD87B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AED3677-C1AD-4EEE-9DE3-41B9A8AD87B3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8AED3677-C1AD-4EEE-9DE3-41B9A8AD87B3}.Debug|x64.Build.0 = Debug|Any CPU
+		{8AED3677-C1AD-4EEE-9DE3-41B9A8AD87B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AED3677-C1AD-4EEE-9DE3-41B9A8AD87B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AED3677-C1AD-4EEE-9DE3-41B9A8AD87B3}.Release|x64.ActiveCfg = Release|Any CPU
+		{8AED3677-C1AD-4EEE-9DE3-41B9A8AD87B3}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
