@@ -5,7 +5,7 @@
 
 <div class="container-fluid topSplash">
     <div class="row">
-        <div class="col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
             <img src="~/Content/images/GameLogo.png" class="logo" />
         </div>
     </div>
@@ -14,22 +14,36 @@
             <h4>Project Phoenix Rising is a Third Person action MOBA in development by Visionary Games. Subscribe to our newsletter below to get the latest updates on the game's progress.</h4>
             <br />
 
-            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "Edit-Email-form" }))
+            @if (TempData["Success"] != null)
             {
-                @Html.AntiForgeryToken();
-                <div class="row">
-                    <div class="col-xs-offset-1 col-xs-10  col-sm-offset-0 col-sm-9">
-                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Email Address", @class = "form-control subscribeText" })
-                        @Html.ValidationMessageFor(m => m.Email)
-                    </div>
-                    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3">
-                        <input type="submit" value="Subscribe" class="subscribeButton" />
-                    </div>
-                </div>
+                <div class="alert alert-info">@TempData["Success"]</div>
             }
+            else
+            {
+                using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "Edit-Email-form" }))
+                {
+                    @Html.AntiForgeryToken();
+                    <div class="row">
+                        <div class="col-xs-offset-1 col-xs-10  col-sm-offset-0 col-sm-9">
+                            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email Address", @class = "form-control subscribeText" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class= "validationError" })
+                        </div>
+                        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3">
+                            <input type="submit" value="Subscribe" class="subscribeButton" />
+                        </div>
+                    </div>
+                }
+            }
+            @if (TempData["Errors"] != null)
+            {
+                <div class="col-xs-offset-1 col-xs-10  col-sm-offset-0 col-sm-12 alert alert-danger" style="margin-top: 10px;">@TempData["Errors"]</div>
+            }
+
             <br />
-            <h4>You can also join the community on Reddit and Discord!</h4>
             <div class="row">
+                <div class="col-xs-offset-1 col-xs-10  col-sm-offset-0 col-sm-12" style="margin-top: 10px;">
+                    <h4>You can also join the community on Reddit and Discord!</h4>
+                </div>
                 <div class="col-xs-offset-2 col-xs-8 col-sm-offset-1 col-sm-5">
                     <a href="https://www.reddit.com/r/visionary_games/" target="new"><img src="~/Content/images/RedditLarge.png" class="logo" /></a>
                 </div>
@@ -42,35 +56,83 @@
 </div>
 
 <div class="container-fluid mainContent">
+    <!-- Background pattern from Toptal Subtle Patterns -->
     <div class="row">
         <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6 subBox">
-            Visionary Games is an indie development studio that was created by a collection of people located all around the world with a singular idea in mind: to create high quality, visually spectacular, mechanically driven games with the communities ideas as the foundation of development.
+            Visionary Games is an indie development studio that was created by a collection of people located all around the world with a singular idea in mind: to create high quality, visually spectacular, mechanically driven games with the community's ideas as the foundation of development.
             <br /><br />
-            Our current project under development is called Project: Phoenix Rising and is aimed to be a 3D Z-axis Multiplayer Action Real Time Strategy game that incorporates the basic fundamentals found in most moba’s, but differs by being 3rd person with Z-axis input. The art style will be based on realism while having many sci-fi and fantasy elements present.
+            Our current project under development is called Project: Phoenix Rising and is aimed to be a 3D Z-axis Multiplayer Online Battle Arena that incorporates the basic fundamentals found in most MOBAs, but differs by using a 3rd person with Z-axis input. The art style will be based on realism while having many sci-fi and fantasy elements present.
         </div>
     </div>
     <br />
     <div class="row">
         <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
-            <div class="video-aspect-ratio">
-                <iframe class="youtubeEmbed" src="https://www.youtube.com/embed/Er86ti6A670" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <div class="video-aspect-ratio" style="border: 1px solid #424242;">
+                <iframe class="youtubeEmbed" src="https://www.youtube.com/embed/7ShUg-GpvPI" frameborder="0" allow="autoplay; encrypted-media" style="padding: 1px;" allowfullscreen></iframe>
             </div>
 
             <br />
 
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="border: 1px solid #424242;">
                 <ol class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                     <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                    <li data-target="#myCarousel" data-slide-to="4"></li>
+                    <li data-target="#myCarousel" data-slide-to="5"></li>
+                    <li data-target="#myCarousel" data-slide-to="6"></li>
+                    <li data-target="#myCarousel" data-slide-to="7"></li>
+                    <li data-target="#myCarousel" data-slide-to="8"></li>
+                    <li data-target="#myCarousel" data-slide-to="9"></li>
+                    <li data-target="#myCarousel" data-slide-to="10"></li>
                 </ol>
 
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="~/Content/images/Carousel1.png" alt="1" class="logoFull">
+                        <a href="~/Content/images/maxres/C1.jpg" target="new"><img src="~/Content/images/C1.jpg" alt="1" class="logoFull"></a>
                     </div>
 
                     <div class="item">
-                        <img src="~/Content/images/Carousel3.png" alt="3" class="logoFull">
+                        <a href="~/Content/images/maxres/C2.png" target="new"><img src="~/Content/images/C2.jpg" alt="2" class="logoFull"></a>
+                    </div>
+
+                    <div class="item">
+                        <a href="~/Content/images/maxres/C3.png" target="new"><img src="~/Content/images/C3.jpg" alt="3" class="logoFull"></a>
+                    </div>
+
+                    <div class="item">
+                        </a>
+                        <a href="~/Content/images/maxres/C4.png" target="new"><img src="~/Content/images/C4.jpg" alt="4" class="logoFull"></a>
+                    </div>
+
+                    <div class="item">
+                        </a>
+                        <a href="~/Content/images/maxres/C5.png" target="new"><img src="~/Content/images/C5.jpg" alt="5" class="logoFull"></a>
+                    </div>
+
+                    <div class="item">
+                        <a href="~/Content/images/maxres/C6.jpg" target="new"><img src="~/Content/images/C6.jpg" alt="6" class="logoFull"></a>
+                    </div>
+
+                    <div class="item">
+                        <a href="~/Content/images/maxres/C7.png" target="new"><img src="~/Content/images/C7.jpg" alt="7" class="logoFull"></a>
+                    </div>
+
+                    <div class="item">
+                        <a href="~/Content/images/maxres/C8.png" target="new"><img src="~/Content/images/C8.jpg" alt="8" class="logoFull"></a>
+                    </div>
+
+                    <div class="item">
+                        <a href="~/Content/images/maxres/C9.png" target="new"><img src="~/Content/images/C9.jpg" alt="9" class="logoFull"></a>
+                    </div>
+
+                    <div class="item">
+                        <a href="~/Content/images/maxres/C10.png" target="new"><img src="~/Content/images/C10.jpg" alt="10" class="logoFull"></a>
+                    </div>
+
+                    <div class="item">
+                        <a href="~/Content/images/maxres/C11.png" target="new"><img src="~/Content/images/C11.jpg" alt="11" class="logoFull"></a>
                     </div>
                 </div>
 
@@ -87,18 +149,18 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid foot">
     <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
         <div class="row">
             <div class="col-sm-8" style="color: white;">
                 <div class="legal">Copyright Visionary Games 2018</div>
                 <a href="https://www.reddit.com/r/visionary_games/" target="new"><img src="~/Content/images/RedditSmall.png" class="socialLogoSmall"></a>
                 <a href="https://discord.gg/dCM5HSP" target="new"><img src="~/Content/images/DiscordSmall.png" class="socialLogoSmall"></a>
-                <a href="https://www.youtube.com/channel/UCyOsSbf2fEiOC20HRs5_9uQ" target="new"><img src="~/Content/images/YouTubeSmall.png" class="socialLogoSmall"></a>
+                <a href="https://www.youtube.com/c/VisionaryGames" target="new"><img src="~/Content/images/YouTubeSmall.png" class="socialLogoSmall"></a>
                 <a href="https://www.facebook.com/VisionaryGamesOfficial/" target="new"><img src="~/Content/images/FacebookSmall.png" class="socialLogoSmall"></a>
                 <a href="https://trello.com/b/wfDe9i61/public-roadmap" target="new"><img src="~/Content/images/TrelloSmall.png" class="socialLogoSmall"></a>
             </div>
-            <div class="col-sm-4" style="color: white;">
+            <div class="col-sm-4" style="color: white; margin-top: 5px;">
                 <img src="~/Content/images/CompanyLogo.png" class="logoFull">
             </div>
         </div>
