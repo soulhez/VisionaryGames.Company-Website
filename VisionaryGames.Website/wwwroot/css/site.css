@@ -1,35 +1,92 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.topSplash {
+    background: url("images/background.jpg") no-repeat center center;
+    background-size: cover;
+    min-height: 100%;
+    text-align: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid #808080;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.subBox {
+    background-color: black;
+    background: rgba(0,0,0,.6);
+    border-radius: 5px;
+    color: #e5e5e5;
+    border: 1px solid #424242;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.mainContent {
+    background-image: url("images/tilebackground3.png");
+    padding-top: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid #808080;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
+.subscribeText {
+    height: 35px;
+    margin-top: 5px;
+}
+
+.subscribeButton {
+    width: 100%;
+    background-color: #F15A24;
+    height: 35px;
+    border: 0;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.logo {
+    width: 80%;
+}
+
+.youtubeEmbed {
+    position: absolute;
+    width: 99.9%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.socialLogoSmall {
+    height: 30px;
+    margin: 5px;
+}
+
+.logoFull {
     width: 100%;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+.legal {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+.video-aspect-ratio {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 51%;
+}
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+body {
+    background-color: #191D1F;
+}
+
+.foot {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.validationError {
+    color: #F15A24;
 }
