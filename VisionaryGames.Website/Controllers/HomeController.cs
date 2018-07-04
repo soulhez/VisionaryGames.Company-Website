@@ -6,24 +6,32 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VisionaryGames.Website.Models;
 using PhoenixRising.InternalAPI.App.MailList;
+using Microsoft.Extensions.Options;
 
 namespace VisionaryGames.Website.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private AppSettings AppSettings { get; set; }
+
+        public HomeController(IOptions<AppSettings> settings)
+        {
+            AppSettings = settings.Value;
+        }
+
+        public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Subscribe model)
+        public IActionResult Index(Subscribe model)
         {
             if (ModelState.IsValid)
             {
-                string connection = ConfigurationManager.AppSettings["InternalAPIURL"];
-                var appAccessToken = ConfigurationManager.AppSettings["AppKey"];
+                string connection = AppSettings.InternalAPIURL;
+                var appAccessToken = AppSettings.AppKey;
 
                 SubscribeRequest subscribeRequest = new SubscribeRequest(connection, appAccessToken, model.Email);
                 SubscribeResponse subscribeResponse = subscribeRequest.Send();
@@ -50,5 +58,4 @@ namespace VisionaryGames.Website.Controllers
             }
         }
     }
-}
 }
