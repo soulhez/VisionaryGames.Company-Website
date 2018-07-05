@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using VisionaryGames.Website.Models;
 using PhoenixRising.InternalAPI.App.MailList;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 
 namespace VisionaryGames.Website.Controllers
 {
     public class HomeController : Controller
     {
-        private AppSettings AppSettings { get; set; }
+        private IOptions<AppSettings> AppSettings { get; set; }
 
-        public HomeController(IOptions<AppSettings> settings)
+        public HomeController(IOptions<AppSettings> appSettings)
         {
-            AppSettings = settings.Value;
+            AppSettings = appSettings;
         }
 
         public IActionResult Index()
@@ -30,8 +31,8 @@ namespace VisionaryGames.Website.Controllers
         {
             if (ModelState.IsValid)
             {
-                string connection = AppSettings.InternalAPIURL;
-                var appAccessToken = AppSettings.AppKey;
+                string connection = AppSettings.Value.InternalAPIURL;
+                var appAccessToken = AppSettings.Value.AppKey;
 
                 SubscribeRequest subscribeRequest = new SubscribeRequest(connection, appAccessToken, model.Email);
                 SubscribeResponse subscribeResponse = subscribeRequest.Send();
