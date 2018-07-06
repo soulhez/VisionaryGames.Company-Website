@@ -13,13 +13,6 @@ namespace VisionaryGames.Website.Controllers
 {
     public class HomeController : Controller
     {
-        private IOptions<AppSettings> AppSettings { get; set; }
-
-        public HomeController(IOptions<AppSettings> appSettings)
-        {
-            AppSettings = appSettings;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -31,8 +24,8 @@ namespace VisionaryGames.Website.Controllers
         {
             if (ModelState.IsValid)
             {
-                string connection = AppSettings.Value.InternalAPIURL;
-                var appAccessToken = AppSettings.Value.AppKey;
+                string connection = "";
+                var appAccessToken = "";
 
                 SubscribeRequest subscribeRequest = new SubscribeRequest(connection, appAccessToken, model.Email);
                 SubscribeResponse subscribeResponse = subscribeRequest.Send();
