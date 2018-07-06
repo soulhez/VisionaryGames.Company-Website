@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using System.Net.Sockets;
 
 namespace VisionaryGames.Website
 {
@@ -33,15 +37,15 @@ namespace VisionaryGames.Website
             {
             new ServiceInstanceListener(
                 serviceContext =>
-                    new KestrelCommunicationListener(
+                    new HttpSysCommunicationListener(
                         serviceContext,
                         "ServiceEndpoint",
                         (url, listener) =>
                         {
-                            ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting Kestrel on {url}");
+                            ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting HttpSys on {url}");
 
                             return new WebHostBuilder()
-                                .UseKestrel()
+                                .UseHttpSys()
                                 .ConfigureServices(
                                     services => services
                                         .AddSingleton<HttpClient>(new HttpClient())
@@ -56,4 +60,24 @@ namespace VisionaryGames.Website
             };
         }
     }
+
+    public static class KestrelServerOptionsHttpsX509StoreExtensions
+    {
+        public static ListenOptions UseHttps(
+            this ListenOptions options,
+            string subjectName,
+            StoreName storeName,
+            StoreLocation storeLocation)
+        {
+            var certStore = new X509Store(storeName, storeLocation);
+            certStore.Open(OpenFlags.ReadOnly);
+            var certificates = certStore.Certificates
+                .Find(X509FindType.FindByThumbprint, subjectName, validOnly: false);
+
+            var certificate = certificates.OfType<X509Certificate2>().First();
+
+            return options.UseHttps(certificate);
+        }
+    }
+
 }

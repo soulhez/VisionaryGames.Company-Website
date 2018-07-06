@@ -9,6 +9,9 @@
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="VisionaryGames.WebsitePkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides />
+    <Policies>
+      <EndpointBindingPolicy EndpointRef="ServiceEndpoint" CertificateRef="HttpsCert" />
+    </Policies>
   </ServiceManifestImport>
   <DefaultServices>
     <!-- The section below creates instances of service types, when an instance of this 
@@ -22,4 +25,7 @@
       </StatelessService>
     </Service>
   </DefaultServices>
+  <Certificates>
+    <EndpointCertificate X509FindValue="AE106321313AF13F40669D211B780BB3D4DBA03A" Name="HttpsCert" />
+  </Certificates>
 </ApplicationManifest>
