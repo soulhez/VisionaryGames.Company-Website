@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsServiceFabricServiceProject>True</IsServiceFabricServiceProject>
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
+    <UserSecretsId>1936173c-7de2-4bab-b0f1-b3ec9c1c09c1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -15,6 +15,7 @@ using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using System.Net.Sockets;
+using System.Fabric.Description;
 
 namespace VisionaryGames.Website
 {
@@ -33,50 +34,23 @@ namespace VisionaryGames.Website
         /// <returns>The collection of listeners.</returns>
         protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
         {
-            return new ServiceInstanceListener[]
-            {
-            new ServiceInstanceListener(
-                serviceContext =>
-                    new HttpSysCommunicationListener(
-                        serviceContext,
-                        "ServiceEndpoint",
-                        (url, listener) =>
-                        {
-                            ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting HttpSys on {url}");
+            var endpoints = Context.CodePackageActivationContext.GetEndpoints().Where(endpoint => endpoint.Protocol == EndpointProtocol.Http || endpoint.Protocol == EndpointProtocol.Https);
 
-                            return new WebHostBuilder()
-                                .UseHttpSys()
-                                .ConfigureServices(
-                                    services => services
-                                        .AddSingleton<HttpClient>(new HttpClient())
-                                        .AddSingleton<FabricClient>(new FabricClient())
-                                        .AddSingleton<StatelessServiceContext>(serviceContext))
-                                .UseContentRoot(Directory.GetCurrentDirectory())
-                                .UseStartup<Startup>()
-                                .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.None)
-                                .UseUrls(url)
-                                .Build();
-                        }))
-            };
-        }
-    }
-
-    public static class KestrelServerOptionsHttpsX509StoreExtensions
-    {
-        public static ListenOptions UseHttps(
-            this ListenOptions options,
-            string subjectName,
-            StoreName storeName,
-            StoreLocation storeLocation)
-        {
-            var certStore = new X509Store(storeName, storeLocation);
-            certStore.Open(OpenFlags.ReadOnly);
-            var certificates = certStore.Certificates
-                .Find(X509FindType.FindByThumbprint, subjectName, validOnly: false);
-
-            var certificate = certificates.OfType<X509Certificate2>().First();
-
-            return options.UseHttps(certificate);
+            return endpoints.Select(endpoint => new ServiceInstanceListener(serviceContext =>
+              // New Service Fabric listener for each endpoint configuration in the manifest.
+              new HttpSysCommunicationListener(serviceContext, endpoint.Name, (url, listener) =>
+              {
+                  return new WebHostBuilder()
+                                    .UseHttpSys()
+                                    .ConfigureServices(
+                                        services => services
+                                            .AddSingleton<StatelessServiceContext>(serviceContext))
+                                    .UseContentRoot(Directory.GetCurrentDirectory())
+                                    .UseStartup<Startup>()
+                                    .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.None)
+                                    .UseUrls(url)
+                                    .Build();
+              }), endpoint.Name.ToString()));
         }
     }
 
