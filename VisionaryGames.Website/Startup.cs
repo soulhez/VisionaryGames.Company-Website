@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
 using VisionaryGames.Website.Config;
 
 namespace VisionaryGames.Website
@@ -26,12 +28,29 @@ namespace VisionaryGames.Website
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<AppSettings>(Configuration);
+
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en"),
+                new CultureInfo("es"),
+                new CultureInfo("fr"),
+                new CultureInfo("de")
+            };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(new CultureInfo("en")),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             if (env.IsDevelopment())
             {
@@ -44,7 +63,7 @@ namespace VisionaryGames.Website
             }
 
             var options = new RewriteOptions().AddRedirectToHttpsPermanent();
-
+            
             app.UseRewriter(options);
 
             app.UseStaticFiles();
