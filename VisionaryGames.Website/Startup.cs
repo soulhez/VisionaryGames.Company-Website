@@ -47,7 +47,7 @@ namespace VisionaryGames.Website
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture(new CultureInfo("en")),
+                DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US"),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             });
