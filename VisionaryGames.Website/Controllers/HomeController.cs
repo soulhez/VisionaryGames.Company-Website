@@ -9,15 +9,19 @@ using PhoenixRising.InternalAPI.App.MailList;
 using Microsoft.Extensions.Options;
 using VisionaryGames.Website.Config;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 
 namespace VisionaryGames.Website.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(IOptions<AppSettings> appSettings)
+        public HomeController(IOptions<AppSettings> appSettings, IStringLocalizer<HomeController> localizer)
         {
             AppSettings = appSettings;
+            _localizer = localizer;
         }
+
+        private readonly IStringLocalizer<HomeController> _localizer;
 
         public IOptions<AppSettings> AppSettings { get; set; }
 
