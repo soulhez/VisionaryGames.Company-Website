@@ -28,7 +28,7 @@ namespace VisionaryGames.Website.Controllers
         public IActionResult Index()
         {
             string test = _localizer["AboutPPR"];
-            return View(test);
+            return View();
         }
 
         [HttpPost]
